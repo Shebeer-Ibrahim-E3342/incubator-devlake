@@ -24,7 +24,7 @@ readme = "README.md"
 [tool.poetry.dependencies]
 python = "^3.9"
 pydevlake = { path = "../../pydevlake", develop = true }
-mysqlclient = ">=2.1.1,<2.2.0"
+mysqlclient = "==2.2.3"
 
 [build-system]
 requires = ["poetry-core"]
