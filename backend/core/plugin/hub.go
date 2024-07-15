@@ -56,6 +56,7 @@ func GetPlugin(name string) (PluginMeta, errors.Error) {
 type PluginCallBack func(name string, plugin PluginMeta) errors.Error
 
 func TraversalPlugin(handle PluginCallBack) errors.Error {
+	fmt.Println(plugins)
 	for name, plugin := range plugins {
 		err := handle(name, plugin)
 		if err != nil {

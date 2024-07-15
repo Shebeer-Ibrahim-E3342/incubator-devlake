@@ -45,6 +45,7 @@ export const init = createAsyncThunk('connections/init', async (plugins: string[
       .filter((plugin) => plugin !== 'webhook')
       .map(async (plugin) => {
         const connections = await API.connection.list(plugin);
+        console.log(plugin)
         return connections.map((connection) => transformConnection(plugin, connection));
       }),
   );
@@ -144,6 +145,7 @@ export const connectionsSlice = createSlice({
       })
       .addCase(init.fulfilled, (state, action) => {
         state.plugins = action.payload.plugins;
+        console.log(action)
         state.connections = action.payload.connections;
         state.webhooks = action.payload.webhooks;
         state.status = 'success';

@@ -19,6 +19,10 @@ package plugininfo
 
 import (
 	"fmt"
+	"net/http"
+	"reflect"
+	"sync"
+
 	"github.com/apache/incubator-devlake/core/dal"
 	"github.com/apache/incubator-devlake/core/errors"
 	"github.com/apache/incubator-devlake/core/models/domainlayer/domaininfo"
@@ -27,9 +31,6 @@ import (
 	"github.com/apache/incubator-devlake/server/api/shared"
 	"github.com/gin-gonic/gin"
 	"gorm.io/gorm/schema"
-	"net/http"
-	"reflect"
-	"sync"
 )
 
 type SubTaskMeta struct {
@@ -179,6 +180,7 @@ func Get(c *gin.Context) {
 			tables := pm.GetTablesInfo()
 			for _, table := range tables {
 				TableInfos := NewTableInfos(table)
+				fmt.Println(name, table)
 				infoPlugin.Tables = append(infoPlugin.Tables, TableInfos)
 			}
 		}
@@ -226,7 +228,7 @@ func GetPluginMetas(c *gin.Context) {
 
 			pluginMeta.Metric = metric
 		}
-
+		fmt.Println(name, pluginMeta)
 		metas = append(metas, pluginMeta)
 
 		return nil

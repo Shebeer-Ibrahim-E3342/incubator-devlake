@@ -18,6 +18,8 @@ limitations under the License.
 package services
 
 import (
+	"fmt"
+
 	"github.com/apache/incubator-devlake/core/errors"
 	"github.com/apache/incubator-devlake/core/plugin"
 )
@@ -39,6 +41,7 @@ func GetPluginsApiResources() (map[string]map[string]map[string]plugin.ApiResour
 	for pluginName, pluginEntry := range plugin.AllPlugins() {
 		if pluginApi, ok := pluginEntry.(plugin.PluginApi); ok {
 			res[pluginName] = pluginApi.ApiResources()
+			fmt.Println(res[pluginName], pluginApi, pluginName, pluginEntry)
 		}
 	}
 	return res, nil

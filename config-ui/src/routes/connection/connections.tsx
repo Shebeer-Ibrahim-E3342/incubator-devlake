@@ -46,11 +46,13 @@ export const Connections = () => {
   const connections = useAppSelector(selectAllConnections);
   const webhooks = useAppSelector(selectWebhooks);
 
+  console.log("plugins", plugins)
   const filterWebhookPlugins = plugins.filter((p) => p !== 'webhook');
   const index = filterWebhookPlugins.findIndex((p) => SORT_START_WITH.includes(p[0]));
 
   const [firstPlugins, secondPlugins] = useMemo(() => {
     if (index > 0) {
+      console.log(filterWebhookPlugins);
       return chunk(filterWebhookPlugins, index);
     }
     return [filterWebhookPlugins, []];
@@ -86,6 +88,7 @@ export const Connections = () => {
       <h4>A-N</h4>
       <ul>
         {firstPlugins.map((plugin) => {
+        console.log("firstPlugins", firstPlugins);
           const pluginConfig = getPluginConfig(plugin);
           const connectionCount = connections.filter((cs) => cs.plugin === plugin).length;
           return (
